@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from bs4 import BeautifulSoup
 import requests
+import csv
 
 app = Flask(__name__)
 
@@ -41,12 +42,32 @@ def api2():
 			# print(spec.text)
 			specin2.append(spec.text)
 
+		# SAVE CSV
+		# with open('output_data.txt') as csv_file:
+		# 	csv_reader = csv.reader(csv_file, delimiter=',')
+		# 	line_count = 0
+		# 	for row in csv_reader:
+		# 		print(specin[row])
+
+		file = open('fonbo_data.csv', 'w')
+		for row in range(len(specin)):
+			file.write(f'{specin[row]},{specin2[row]}\n')
+		file.close()
+		candownload = True
+
 
 		# return jsonify({'you get': specin}), 201
-		return render_template('index.html', specin=specin, specin2=specin2)
+		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload)
 	else:
 		# return jsonify({"about":"hello semua"})
-		return render_template('index.html', specin=specin, specin2=specin2)
+		candownload = False
+		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload)
+
+
+@app.route('/download')
+def download():
+    return send_file('fonbo_data.csv')
+
 
 if __name__=='__main__':
 	app.run(debug=True)
