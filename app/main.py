@@ -17,8 +17,8 @@ def api2():
 		url2 = request.form['url2']
 
 
-		# source = requests.get(url1).text
-		source = open(url1)
+		source = requests.get(url1).text
+		# source = open(url1)
 		soup = BeautifulSoup(source, 'lxml')
 		# print(f'https://www.gsmarena.com/{link}')
 
@@ -30,8 +30,8 @@ def api2():
 			specin.append(spec.text)
 
 
-		# source2 = requests.get(url2).text
-		source2 = open(url2)
+		source2 = requests.get(url2).text
+		# source2 = open(url2)
 		soup2 = BeautifulSoup(source2, 'lxml')
 		# print(f'https://www.gsmarena.com/{link}')
 
@@ -51,7 +51,7 @@ def api2():
 
 		file = open('fonbo_data.csv', 'w')
 		for row in range(len(specin)):
-			file.write(f'{specin[row]},{specin2[row]}\n')
+			file.write(f'{specin[row]};{specin2[row]}\n')
 		file.close()
 		candownload = True
 
@@ -66,7 +66,9 @@ def api2():
 
 @app.route('/download')
 def download():
-    return send_file('fonbo_data.csv')
+	result = send_file('fonbo_data.csv', as_attachment=True)
+	return result
+
 
 
 if __name__=='__main__':
