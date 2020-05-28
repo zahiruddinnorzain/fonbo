@@ -9,7 +9,9 @@ app = Flask(__name__)
 def api2():
 	# titles = []
 	specin = []
-	specin2 = []
+	specin2 = [] 
+	model='&nbsp;'
+	model2='&nbsp;'
 
 	if (request.method == 'POST'):
 		# some_json = request.get_json()
@@ -17,26 +19,52 @@ def api2():
 		url2 = request.form['url2']
 
 
-		source = requests.get(url1).text
-		# source = open(url1)
+		# PHONE 1
+		# source = requests.get(url1).text
+		source = open(url1)
 		soup = BeautifulSoup(source, 'lxml')
+
+		# for e in soup.findAll('br'):
+		# 	# e.extract()
+		# 	e.replace_with(' ')
+		# for e in soup.findAll('\n'):
+		# 	# e.extract()
+		# 	e.replace_with(' ')
+			
 		# print(f'https://www.gsmarena.com/{link}')
+		print(soup)
 
 		specs = soup.find_all('td', class_='nfo')
-		titlespecs = soup.find_all('td', class_='ttl')
+		model = soup.find('h1', class_='specs-phone-name-title').text
+		# titlespecs = soup.find_all('td', class_='ttl')
+
+		# save name to link
+		specin.append(model)
 
 		for spec in specs:
 			# print(spec.text)
+			# entry = spec.text.strip()
+			# print(entry)
 			specin.append(spec.text)
 
 
-		source2 = requests.get(url2).text
-		# source2 = open(url2)
+#-----------------------------------------------------
+
+
+
+		# PHONE 2
+		# source2 = requests.get(url2).text
+		source2 = open(url2)
 		soup2 = BeautifulSoup(source2, 'lxml')
 		# print(f'https://www.gsmarena.com/{link}')
 
 		specs = soup2.find_all('td', class_='nfo')
-		titlespecs = soup2.find_all('td', class_='ttl')
+		model2 = soup.find('h1', class_='specs-phone-name-title').text
+		# titlespecs = soup2.find_all('td', class_='ttl')
+		# print(specs)
+
+		# save name to link
+		specin2.append(model2)
 
 		for spec in specs:
 			# print(spec.text)
@@ -57,11 +85,11 @@ def api2():
 
 
 		# return jsonify({'you get': specin}), 201
-		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload)
+		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload, model=model, model2=model2)
 	else:
 		# return jsonify({"about":"hello semua"})
 		candownload = False
-		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload)
+		return render_template('index.html', specin=specin, specin2=specin2, candownload=candownload, model=model, model2=model2)
 
 
 @app.route('/download')
