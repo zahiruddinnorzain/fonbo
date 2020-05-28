@@ -19,9 +19,11 @@ def api2():
 		url2 = request.form['url2']
 
 
+
+
 		# PHONE 1
-		# source = requests.get(url1).text
-		source = open(url1)
+		source = requests.get(url1).text
+		# source = open(url1)
 		soup = BeautifulSoup(source, 'lxml')
 
 		# for e in soup.findAll('br'):
@@ -30,9 +32,8 @@ def api2():
 		# for e in soup.findAll('\n'):
 		# 	# e.extract()
 		# 	e.replace_with(' ')
-			
+
 		# print(f'https://www.gsmarena.com/{link}')
-		print(soup)
 
 		specs = soup.find_all('td', class_='nfo')
 		model = soup.find('h1', class_='specs-phone-name-title').text
@@ -53,13 +54,13 @@ def api2():
 
 
 		# PHONE 2
-		# source2 = requests.get(url2).text
-		source2 = open(url2)
+		source2 = requests.get(url2).text
+		# source2 = open(url2)
 		soup2 = BeautifulSoup(source2, 'lxml')
 		# print(f'https://www.gsmarena.com/{link}')
 
 		specs = soup2.find_all('td', class_='nfo')
-		model2 = soup.find('h1', class_='specs-phone-name-title').text
+		model2 = soup2.find('h1', class_='specs-phone-name-title').text
 		# titlespecs = soup2.find_all('td', class_='ttl')
 		# print(specs)
 
@@ -100,7 +101,7 @@ def download():
 
 
 if __name__=='__main__':
-	app.run(debug=True)
+	app.run(debug=False)
 
 
 # @app.route('/')

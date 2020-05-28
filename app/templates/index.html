@@ -26,7 +26,7 @@
 				</div>
 				<div class="card-body">
 					<h2>FONBO</h2>
-					<p>Comparison two phone from gsmarena database.</p> 
+					<p>Comparison two phone from gsmarena database. credit to <a href="https://www.gsmarena.com/" target=_blank>gsmarena</a>.</p> 
 				</div>
 			</div>
 		</div>
@@ -40,14 +40,15 @@
 				<div class="card-body">
 					<form action="" method="POST">
 						<div class="form-group">
-							<label for="fname">url fon 1:</label><br>
-							<input type="text" id="fname"  class="form-control mb-2" name="url1" value="index.html">
-							<label for="fname">url fon 2:</label><br>
-							<input type="text" id="fname"  class="form-control" name="url2" value="index.html">
+							<label for="fname" class="mb-1">URL Phone 1:</label><br><small style="color:grey;">example: https://www.gsmarena.com/oppo_a72-10196.php</small>
+							<input type="text" id="fname"  class="form-control mb-4" name="url1" value="">
+
+							<label for="fname" class="mb-1">URL Phone 2:</label><br><small style="color:grey;">example: https://www.gsmarena.com/oppo_a72-10196.php</small>
+							<input type="text" id="fname"  class="form-control" name="url2" value="">
 							<input type="submit" class="btn btn-primary mt-2" value="Submit">
 
 							{% if candownload == true %}
-							<a id="showlink" href="/download" class="btn btn-info mt-2 p-1 px-3"><i class="fa fa-download" aria-hidden="true"></i></a>
+							<a id="showlink" href="/download" class="btn btn-info mt-2 p-1 px-3" alt="download csv file"><i class="fa fa-download" aria-hidden="true"></i></a>
 							{% endif %}
 
 						</div>
@@ -90,7 +91,7 @@
 	
 						{% for eachspecin in specin %}
 						<tr>
-						<td>{{ eachspecin }}</td>
+						<td onclick="this.style.backgroundColor = '#66ff75';">{{ eachspecin }}</td>
 						</tr>
 						{% endfor %}
 					</table>
@@ -116,7 +117,7 @@
 	
 						{% for eachspecin2 in specin2 %}
 						<tr>
-						<td>{{ eachspecin2 }}</td>
+						<td onclick="this.style.backgroundColor = '#66ff75';">{{ eachspecin2 }}</td>
 						</tr>
 						{% endfor %}
 					</table>
@@ -140,6 +141,8 @@
 // }
 
 </script>
+
+<!-- <h1 onclick="this.style.backgroundColor = 'blue';">Click on this text!</h1> -->
 
 </body>
 </html>
