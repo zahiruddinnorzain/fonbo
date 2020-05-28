@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -16,45 +16,111 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col">
+
+		<div class="col-md-6">
+
 			<div class="card mt-4">
-				<div class="card-header">
-					<h3>News Covid-19 Malaysia</h3>	
+				<div class="card-header bg-dark text-white">
+					<h3>WELCOME TO FONBO</h3>
 				</div>
 				<div class="card-body">
-					<table class="table-bordered">
-						
-							{% for eachspecin in specin %}
-								<tr><td>{{ eachspecin }}</td></tr>
-							{% endfor %}
-
-					</table>
-
-					<!-- {% for title in titles %}
-						<h4>{{ title }}</h4>
-					{% endfor %}
-
-					{% for img in imgs %}
-						<img src={{img}} width='200px' height='200px'>
-					{% endfor %} -->
-
-					<!-- {% for title in titles %}
-						{{title}}
-					{% for img in imgs %}
-						<img src={{img}} width='200px' height='200px'>
-					{% endfor %}
-					{% endfor %} -->
-					<!-- <img src="https://lh3.googleusercontent.com/-1RqJK98oNuY/Xr6L6NpWOQI/AAAAAAAAAYE/KAay8PNH4oEsY6_Ma2RHKQDzOzegaFF4gCLcBGAsYHQ/s1600/1589545931209252-0.png"> -->
-					<label>Realtime source from http://covid-19.moh.gov.my/<br>
-					by zahir 2020</label><br>
-				</div>
-				<div class="card-footer">
-					<center>mascv 2020. Prodigy Dynamic by Bairoha Enterprise</center>
+					<h2>FONBO</h2>
+					<p>Comparison two phone from gsmarena database.</p> 
 				</div>
 			</div>
 		</div>
+
+		<div class="col-md-6">
+
+			<div class="card mt-4">
+				<div class="card-header bg-dark text-white">
+					<h3>Input phone link</h3>
+				</div>
+				<div class="card-body">
+					<form action="/home" method="POST">
+						<div class="form-group">
+							<label for="fname">url fon 1:</label><br>
+							<input type="text" id="fname"  class="form-control mb-2" name="url1" value="index.html">
+							<label for="fname">url fon 2:</label><br>
+							<input type="text" id="fname"  class="form-control" name="url2" value="index.html">
+							<input type="submit"  class="btn btn-primary mt-2" value="Submit">
+						</div>
+					</form> 
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="col-md-6">
+
+			<div class="card mt-4">
+				<div class="card-header">
+					Input phone 2
+				</div>
+				<div class="card-body">
+					<form action="http://localhost:5000/home" method="POST">
+						<label for="fname">url fon:</label><br>
+						<input type="text" id="fname" name="url2" value="url here"><br>
+						<input type="submit" value="Submit">
+					</form> 
+				</div>
+			</div>
+		</div> -->
+
 	</div>
 
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card mt-4">
+				<div class="card-header bg-dark text-white">
+					<h3>Phone 1</h3>	
+				</div>
+				<div class="card-body">
+					<table class="table-bordered table-hover table-sm">
+	
+						{% for eachspecin in specin %}
+						<tr>
+						<td>{{ eachspecin }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+
+				</div>
+				<div class="card-footer">
+					<center>Fonbo 2020. Prodigy Dynamic by Bairoha Enterprise</center>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card mt-4">
+				<div class="card-header bg-dark text-white">
+					<h3>Phone 2</h3>	
+				</div>
+				<div class="card-body">
+					<table class="table-bordered table-hover table-sm">
+	
+						{% for eachspecin2 in specin2 %}
+						<tr>
+						<td>{{ eachspecin2 }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
+				</div>
+				<div class="card-footer">
+					<center>Fonbo 2020. Prodigy Dynamic by Bairoha Enterprise</center>
+				</div>
+			</div>
+		</div>
+
+	</div> <!-- endrow -->
+
 </div>
+
+<script type="text/javascript">
+// https://stackoverflow.com/questions/32404185/event-onclick-on-td-and-tr
+</script>
+
 </body>
 </html>

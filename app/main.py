@@ -1,11 +1,59 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 
 app = Flask(__name__)
 
-@app.route('/')
-def about():
+@app.route('/home', methods=['GET', 'POST'])
+def api2():
+	# titles = []
+	specin = []
+	specin2 = []
+
+	if (request.method == 'POST'):
+		# some_json = request.get_json()
+		url1 = request.form['url1']
+		url2 = request.form['url2']
+
+
+		# source = requests.get(url1).text
+		source = open(url1)
+		soup = BeautifulSoup(source, 'lxml')
+		# print(f'https://www.gsmarena.com/{link}')
+
+		specs = soup.find_all('td', class_='nfo')
+		titlespecs = soup.find_all('td', class_='ttl')
+
+		for spec in specs:
+			# print(spec.text)
+			specin.append(spec.text)
+
+
+		# source2 = requests.get(url2).text
+		source2 = open(url2)
+		soup2 = BeautifulSoup(source2, 'lxml')
+		# print(f'https://www.gsmarena.com/{link}')
+
+		specs = soup2.find_all('td', class_='nfo')
+		titlespecs = soup2.find_all('td', class_='ttl')
+
+		for spec in specs:
+			# print(spec.text)
+			specin2.append(spec.text)
+
+
+		# return jsonify({'you get': specin}), 201
+		return render_template('index.html', specin=specin, specin2=specin2)
+	else:
+		# return jsonify({"about":"hello semua"})
+		return render_template('index.html', specin=specin, specin2=specin2)
+
+if __name__=='__main__':
+	app.run(debug=True)
+
+
+# @app.route('/')
+# def about():
 	# source = requests.get('http://www.moh.gov.my/index.php/pages/view/2019-ncov-wuhan').text
 	# soup = BeautifulSoup(source, 'lxml')
 	# pic = soup.find('img', alt='status-terkini-covid19')['src']
@@ -16,22 +64,31 @@ def about():
 	# pic = soup.find('img', class_='tm-image jl-box-shadow-hover-medium')['src']
 	# full_pic = 'http://covid-19.moh.gov.my/' + str(pic)
 
-	titles = []
-	specin = []
-	# imgs = []
+
+##barui sekali
+	# titles = []
+	# specin = []
+	# # imgs = []
 
 
-	source2 = open('index.html')
-	soup2 = BeautifulSoup(source2, 'lxml')
-	# print(f'https://www.gsmarena.com/{link}')
+	# source2 = open('index.html')
+	# soup2 = BeautifulSoup(source2, 'lxml')
+	# # print(f'https://www.gsmarena.com/{link}')
 
-	specs = soup2.find_all('td', class_='nfo')
-	titlespecs = soup2.find_all('td', class_='ttl')
+	# specs = soup2.find_all('td', class_='nfo')
+	# titlespecs = soup2.find_all('td', class_='ttl')
 
-	for spec in specs:
-		print(spec.text)
-		specin.append(spec.text)
-	return render_template('index.html', specin=specin)
+	# for spec in specs:
+	# 	print(spec.text)
+	# 	specin.append(spec.text)
+
+	# for titlespec in titlespecs:
+	# 	print(titlespec.text)
+	# 	titles.append(titlespec.text)
+
+	# return render_template('index.html', specin=specin, titles=titles)
+
+
 
 '''
 	# show all post
@@ -71,7 +128,6 @@ def about():
 		bodypost = soup2.find('div', class_='post-body entry-content float-container').text
 		print(bodypost)
 		bodys.append(bodypost)
-'''
 	# context = {
  #        'titles':titles,
  #        'bodys':bodys,
@@ -79,6 +135,6 @@ def about():
  #    }
 
 	# return render_template('index.html', specin=specin)
-
-if __name__=='__main__':
-	app.run(debug=True)
+'''
+# if __name__=='__main__':
+# 	app.run(debug=True)
